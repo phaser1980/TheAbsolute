@@ -11,6 +11,7 @@
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="stylesheet" href="assets/v2.css" />
   <title>The Absolute — Gateway Process, decoded</title>
 </head>
 <body>
@@ -22,6 +23,7 @@
       <div class="nav-links">
         <a href="#document">Decode</a>
         <a href="#practice">Practice</a>
+        <a href="#missing-page">Missing page</a>
         <a href="#journal">Journal</a>
         <a href="#grounding">Ground rules</a>
         <button class="nav-install" id="installApp" type="button" hidden>Install</button>
@@ -107,6 +109,45 @@
               <p class="source-fallback">PDF preview blocked? Use <a id="sourceFallback" href="#" target="_blank" rel="noreferrer">open scanned page</a>.</p>
             </aside>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="missing-page" class="case-file-section">
+      <div class="shell">
+        <div class="section-head reveal">
+          <h2>The missing<br>page 25.</h2>
+          <p>The uploaded CIA scan contains 29 PDF images, but its own internal pagination jumps from report page 24 to report page 26. Paragraph 34 stops mid-sentence; paragraphs 35 and 36 are absent; paragraph 37 begins on the next scanned sheet. Version 2.0 treats that break as evidence to investigate, not text to silently reconstruct.</p>
+        </div>
+        <div class="case-alert reveal">
+          <span class="case-stamp">DOCUMENT DISCONTINUITY</span>
+          <strong>PDF scan 26 → missing report page 25 → PDF scan 27</strong>
+          <p>The absence may be an accidental copying or scanning omission, an incomplete archival source packet, or an intentional removal. The CIA PDF itself does not state which explanation is correct.</p>
+        </div>
+        <div class="missing-sequence reveal" aria-label="Missing page sequence">
+          <figure class="scan-sheet scan-facsimile">
+            <div class="facsimile-page"><small>PDF SCAN 26 · INTERNAL PAGE 24</small><b>34. Belief System Considerations.</b><p>…the eternal thought or concept of self which results from this self-consciousness serves the</p><span>CONTINUES ON MISSING LEAF →</span></div>
+            <figcaption><b>PDF scan 26 · report page 24</b><span>Paragraph 34 ends mid-sentence after “serves the…”</span></figcaption>
+          </figure>
+          <div class="missing-leaf" role="img" aria-label="Missing internal report page 25">
+            <span>INTERNAL PAGE</span>
+            <strong>25</strong>
+            <p>Paragraphs 35–36<br>and the continuation of 34</p>
+            <i>Not present in this CIA scan</i>
+          </div>
+          <figure class="scan-sheet scan-facsimile">
+            <div class="facsimile-page"><small>PDF SCAN 27 · INTERNAL PAGE 26</small><b>37. Motivational Aspect.</b><p>It is a step by step procedure which involves repetitive practice of the techniques concerned…</p><span>← RESUMES AFTER TWO ABSENT PARAGRAPHS</span></div>
+            <figcaption><b>PDF scan 27 · report page 26</b><span>The surviving text resumes at paragraph 37, “Motivational Aspect.”</span></figcaption>
+          </figure>
+        </div>
+        <div class="case-grid reveal">
+          <article><span>What the file proves</span><p>A physical leaf in the report sequence is absent from this released scan. The pagination and paragraph numbering independently confirm the gap.</p></article>
+          <article><span>What it does not prove</span><p>The scan alone cannot establish who removed it, when it disappeared, or whether the cause was deliberate suppression rather than ordinary records handling.</p></article>
+          <article><span>Version 2.0 rule</span><p>Recovered copies or transcriptions can be presented later only with provenance: source holder, chain of custody, scan image, publication history and confidence level.</p></article>
+        </div>
+        <div class="case-actions reveal">
+          <a class="button primary" href="https://www.cia.gov/readingroom/docs/CIA-RDP96-00788R001700210016-5.pdf#page=26" id="casePdfLink" target="_blank" rel="noreferrer">Inspect the break in the PDF</a>
+          <button class="button" id="openCaseNotes" type="button">Add investigation note</button>
         </div>
       </div>
     </section>
@@ -234,5 +275,6 @@
 
   <script src="data/pages.js"></script>
   <script src="js/app.js"></script>
+  <script src="js/v2.js"></script>
 </body>
 </html>
