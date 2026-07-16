@@ -1,0 +1,46 @@
+name: Validate static site
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Check JavaScript syntax
+        run: |
+          node --check js/app.js
+          node --check data/pages.js
+          node --check sw.js
+      - name: Validate JSON manifest
+        run: python -m json.tool manifest.webmanifest > /dev/null
+      - name: Parse HTML and verify required assets
+        run: |
+          python - <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+
+          class Parser(HTMLParser):
+              pass
+
+          Parser().feed(Path('index.html').read_text(encoding='utf-8'))
+          required = [
+              'assets/styles.css',
+              'assets/icon.svg',
+              'data/pages.js',
+              'js/app.js',
+              'manifest.webmanifest',
+              'sw.js',
+          ]
+          missing = [path for path in required if not Path(path).is_file()]
+          if missing:
+              raise SystemExit(f'Missing required assets: {missing}')
+          print('Static site validation passed.')
+          PY

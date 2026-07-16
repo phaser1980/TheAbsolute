@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#060914" />
+  <meta name="description" content="The Absolute — an interactive, evidence-aware exploration of the 1983 Analysis and Assessment of Gateway Process." />
+  <meta property="og:title" content="The Absolute — Gateway Process, decoded" />
+  <meta property="og:description" content="Read the 29-page report beside the original scan, practise its grounded attention sequence, and record what actually happens." />
+  <meta property="og:type" content="website" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <title>The Absolute — Gateway Process, decoded</title>
+</head>
+<body>
+  <canvas id="field" aria-hidden="true"></canvas>
+
+  <header class="topbar">
+    <nav class="nav shell" aria-label="Primary navigation">
+      <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"></span>The Absolute</a>
+      <div class="nav-links">
+        <a href="#document">Decode</a>
+        <a href="#practice">Practice</a>
+        <a href="#journal">Journal</a>
+        <a href="#grounding">Ground rules</a>
+        <button class="nav-install" id="installApp" type="button" hidden>Install</button>
+        <a class="keep" href="https://www.cia.gov/readingroom/docs/CIA-RDP96-00788R001700210016-5.pdf" target="_blank" rel="noreferrer">Original scan ↗</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="shell hero-grid">
+        <div class="reveal">
+          <div class="eyebrow">A 1983 document, decoded</div>
+          <h1><span class="gradient-text">The<br>Absolute.</span></h1>
+          <p class="hero-copy">Lieutenant Colonel Wayne M. McDonnell tried to explain a radical proposition: that consciousness may be more than a passenger in physical reality. <strong>Read the report beside the original scan, practise its grounded sequence, and record what actually happens.</strong></p>
+          <div class="hero-progress" aria-live="polite">
+            <span class="progress-ring" id="heroProgressRing">0</span>
+            <span><b id="heroProgressText">0 of 29 pages explored</b><small>Your progress stays in this browser.</small></span>
+          </div>
+          <div class="actions">
+            <a class="button primary" href="#document">Enter the document</a>
+            <a class="button" href="#practice">Begin the sequence</a>
+          </div>
+        </div>
+        <aside class="signal-card reveal" aria-label="Animated torus visualisation">
+          <div class="torus" aria-hidden="true"></div>
+          <div class="signal-caption"><span>The central model</span><strong>A coherent observer inside a proposed holographic field of information.</strong></div>
+        </aside>
+      </div>
+    </section>
+
+    <div class="truth-strip">
+      <div class="shell truth-grid">
+        <article class="truth-item"><span>What it is</span><h3>An Army assessment</h3><p>Written for US Army Intelligence and Security Command on 9 June 1983; later released through the CIA Reading Room.</p></article>
+        <article class="truth-item"><span>What it is not</span><h3>Proof of a simulation</h3><p>The report blends real concepts, period neuroscience, metaphysics and speculative leaps. Declassification does not validate every claim.</p></article>
+        <article class="truth-item"><span>How to use this</span><h3>Explore, test, stay grounded</h3><p>Treat the exercises as attention, relaxation and visualisation practices—not as medical care or guaranteed paranormal access.</p></article>
+      </div>
+    </div>
+
+    <section id="document">
+      <div class="shell">
+        <div class="section-head reveal">
+          <h2>The document,<br>one page at a time.</h2>
+          <p>The explanation and the source now sit together. Search the report, filter by evidence status, listen to a summary, and open the corresponding scanned page without losing your place.</p>
+        </div>
+
+        <div class="reader-tools reveal">
+          <label class="search-field"><span class="sr-only">Search pages</span><input id="pageSearch" type="search" placeholder="Search concepts: hologram, resonance, Focus 12…" /></label>
+          <label><span class="sr-only">Filter evidence status</span><select id="evidenceFilter"><option value="all">All evidence levels</option><option value="grounded">Grounded components</option><option value="mixed">Mixed / extrapolated</option><option value="speculative">Speculative claims</option></select></label>
+          <button class="button small" id="listenPage" type="button">Listen to summary</button>
+          <button class="button small" id="toggleScan" type="button" aria-expanded="true">Hide scan</button>
+        </div>
+
+        <div class="reader-layout">
+          <nav class="page-index reveal" id="pageIndex" aria-label="Document pages"></nav>
+          <div class="reader-stack">
+            <article class="reader-card reveal" aria-live="polite">
+              <div class="reader-meta">
+                <div class="page-kicker" id="pageKicker">Page 01 of 29</div>
+                <span class="visited-badge" id="visitedBadge">New page</span>
+              </div>
+              <h3 id="pageTitle"></h3>
+              <p class="page-summary" id="pageSummary"></p>
+              <div class="lens-grid">
+                <div class="lens"><span>Plain English</span><p id="plainEnglish"></p></div>
+                <div class="lens"><span>Evidence lens</span><p id="evidenceLens"></p></div>
+                <div class="lens"><span>Practice link</span><p id="practiceLink"></p></div>
+              </div>
+              <div class="reader-foot">
+                <div class="status"><i class="status-dot" id="statusDot"></i><span id="statusText"></span></div>
+                <a class="source-page-link" id="sourcePageLink" href="#" target="_blank" rel="noreferrer">Open scanned page ↗</a>
+              </div>
+              <div class="reader-controls">
+                <button class="button small" id="prevPage" type="button">← Previous page</button>
+                <span class="keyboard-hint">Keyboard: ← →</span>
+                <button class="button small" id="nextPage" type="button">Next page →</button>
+              </div>
+            </article>
+
+            <aside class="source-card reveal" id="sourceCard">
+              <div class="source-card-head"><div><span>Primary source</span><b id="sourceTitle">Original scan · page 1</b></div><a href="https://www.cia.gov/readingroom/docs/CIA-RDP96-00788R001700210016-5.pdf" target="_blank" rel="noreferrer">Full PDF ↗</a></div>
+              <iframe id="sourceFrame" title="Original Gateway Process PDF scan" loading="lazy"></iframe>
+              <p class="source-fallback">PDF preview blocked? Use <a id="sourceFallback" href="#" target="_blank" rel="noreferrer">open scanned page</a>.</p>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="practice">
+      <div class="shell">
+        <div class="section-head reveal">
+          <h2>The coherence<br>sequence.</h2>
+          <p>A grounded translation of the report’s recurring techniques: quiet the verbal narrator, scan the body, visualise circulation, widen attention, hold one clear outcome image, then release it and return.</p>
+        </div>
+        <div class="practice-wrap">
+          <form class="practice-panel reveal" id="intentionForm">
+            <h3>Define one pattern</h3>
+            <label class="field-label" for="intention">What are you moving toward?</label>
+            <textarea id="intention" placeholder="A clear, specific outcome—written without forcing how it must happen."></textarea>
+            <label class="field-label" for="imageCue">One simple image that means “it is complete”</label>
+            <input id="imageCue" placeholder="Example: the signed contract resting on the table" />
+            <div class="form-row">
+              <div><label class="field-label" for="duration">Session length</label><select id="duration"><option value="6">6 minutes</option><option value="12" selected>12 minutes</option><option value="18">18 minutes</option></select></div>
+              <div><label class="field-label" for="anchor">Return anchor</label><input id="anchor" value="Open eyes. Feel feet. Name the room." /></div>
+            </div>
+            <div class="form-row">
+              <div><label class="field-label" for="beforeFocus">Focus before</label><select id="beforeFocus"><option value="1">1 · scattered</option><option value="2">2</option><option value="3" selected>3 · neutral</option><option value="4">4</option><option value="5">5 · clear</option></select></div>
+              <label class="toggle-row"><input id="voiceGuidance" type="checkbox" /><span>Speak each step aloud</span></label>
+            </div>
+            <button class="button primary" type="submit">Save and begin</button>
+            <p class="practice-note">Saved only in this browser. Stop if you feel distressed, dizzy or detached. Do not use while driving, operating equipment or when you need full external attention.</p>
+          </form>
+
+          <div class="practice-stage reveal">
+            <div class="practice-step" id="practiceStep">Step 1 · Silence the narrator</div>
+            <h3 id="practiceTitle">Let language become background noise.</h3>
+            <p class="practice-instruction" id="practiceInstruction"></p>
+            <div class="orb-stage"><div class="breath-orb" id="breathOrb"><div><strong id="timer">02:00</strong><span id="breathWord">Ready</span></div></div></div>
+            <div class="step-dots" id="stepDots" aria-label="Practice steps"></div>
+            <div class="actions compact-actions">
+              <button class="button primary" id="startPractice" type="button">Start</button>
+              <button class="button" id="resetPractice" type="button">Reset</button>
+              <button class="button" id="nextPractice" type="button">Next step</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="journal">
+      <div class="shell">
+        <div class="section-head reveal">
+          <h2>Record the signal.<br>Not the story.</h2>
+          <p>A private local journal turns a compelling experience into something you can inspect later. Record the state change, the practical next action and any prediction before the outcome is known.</p>
+        </div>
+
+        <div class="stats-grid reveal">
+          <article class="stat"><span>Completed sessions</span><b id="statSessions">0</b></article>
+          <article class="stat"><span>Minutes practised</span><b id="statMinutes">0</b></article>
+          <article class="stat"><span>Current streak</span><b id="statStreak">0 days</b></article>
+          <article class="stat"><span>Pages explored</span><b id="statPages">0 / 29</b></article>
+        </div>
+
+        <div class="journal-grid">
+          <form class="journal-panel reveal" id="reflectionForm">
+            <div class="panel-kicker">After a session</div>
+            <h3>Capture what changed</h3>
+            <label class="field-label" for="reflection">Raw observations</label>
+            <textarea id="reflection" placeholder="Sensations, images, thoughts or shifts—before interpreting them."></textarea>
+            <div class="form-row">
+              <div><label class="field-label" for="afterFocus">Focus after</label><select id="afterFocus"><option value="1">1 · scattered</option><option value="2">2</option><option value="3" selected>3 · neutral</option><option value="4">4</option><option value="5">5 · clear</option></select></div>
+              <div><label class="field-label" for="nextAction">One observable next action</label><input id="nextAction" placeholder="Email the person, make the sketch, book the meeting…" /></div>
+            </div>
+            <button class="button primary" type="submit">Save session record</button>
+            <p class="form-message" id="reflectionMessage" aria-live="polite"></p>
+          </form>
+
+          <form class="journal-panel reveal" id="experimentForm">
+            <div class="panel-kicker">Signal lab</div>
+            <h3>Pre-register a test</h3>
+            <label class="field-label" for="experimentQuestion">Question or target</label>
+            <input id="experimentQuestion" placeholder="What specific outcome am I testing?" />
+            <label class="field-label" for="experimentPrediction">Prediction written before the result</label>
+            <textarea id="experimentPrediction" placeholder="Specific enough to score as hit, miss or ambiguous."></textarea>
+            <div class="form-row">
+              <div><label class="field-label" for="experimentConfidence">Confidence</label><select id="experimentConfidence"><option value="50">50%</option><option value="60">60%</option><option value="70">70%</option><option value="80">80%</option><option value="90">90%</option></select></div>
+              <div><label class="field-label" for="experimentDate">Check on</label><input id="experimentDate" type="date" /></div>
+            </div>
+            <button class="button" type="submit">Lock prediction</button>
+            <p class="form-message" id="experimentMessage" aria-live="polite"></p>
+          </form>
+        </div>
+
+        <div class="records-panel reveal">
+          <div class="records-head">
+            <div><div class="panel-kicker">Local archive</div><h3>Your records</h3></div>
+            <div class="actions compact-actions"><button class="button small" id="exportJson" type="button">Export JSON</button><button class="button small" id="exportCsv" type="button">Export CSV</button><button class="button small danger-button" id="clearJournal" type="button">Clear local data</button></div>
+          </div>
+          <div class="record-tabs" role="tablist"><button class="active" type="button" data-record-tab="sessions">Sessions</button><button type="button" data-record-tab="experiments">Experiments</button></div>
+          <div id="recordsList" class="records-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="grounding">
+      <div class="shell">
+        <div class="section-head reveal">
+          <h2>Powerful ideas.<br>Firm ground.</h2>
+          <p>The experience works best when wonder and critical thinking remain online together. These principles shape the entire product.</p>
+        </div>
+        <div class="principles">
+          <article class="principle reveal"><b>Claims stay attributed</b><p>“The report proposes” is different from “science proves.” The interface preserves that distinction everywhere.</p></article>
+          <article class="principle reveal"><b>Practice before mythology</b><p>Relaxation, focused attention, imagery and journalling are useful without requiring belief in a holographic universe.</p></article>
+          <article class="principle reveal"><b>Agency without blame</b><p>Visualisation may guide behaviour and perception. It does not mean people caused illness, trauma or misfortune through imperfect thoughts.</p></article>
+          <article class="principle reveal"><b>No medical promises</b><p>Historical claims about healing are presented as claims. The site does not diagnose, treat or replace qualified care.</p></article>
+          <article class="principle reveal"><b>Return is part of the method</b><p>Every session ends by orienting to body, room, time and ordinary responsibilities. Expansion without reintegration is incomplete.</p></article>
+          <article class="principle reveal"><b>Pre-register extraordinary claims</b><p>Write predictions before results, define what counts as a hit, and keep misses. A belief that can explain every outcome cannot test itself.</p></article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-grid">
+      <p><strong>The Absolute</strong> is an independent educational interpretation of a historical document. It is not affiliated with the CIA, US Army, Monroe Institute or Hemi-Sync. It does not establish that reality is a simulation, that consciousness controls external events, or that paranormal abilities are reproducible.</p>
+      <p>Interactive field notebook · 2026</p>
+    </div>
+  </footer>
+
+  <script src="data/pages.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
