@@ -1,65 +1,75 @@
 # The Absolute
 
-An interactive, evidence-aware exploration of Lieutenant Colonel Wayne M. McDonnell's 1983 **Analysis and Assessment of Gateway Process**.
+An interactive, evidence-aware website dedicated to Lieutenant Colonel Wayne M. McDonnell's 9 June 1983 **Analysis and Assessment of Gateway Process**.
 
-## Foundation prototype
+The product has three connected jobs:
 
-The first working version is deliberately dependency-free: open `index.html` directly or publish the repository with GitHub Pages.
+1. **Decode the document** — explain all 29 scanned pages in plain English beside the original CIA Reading Room PDF.
+2. **Translate the method** — guide a grounded six-stage attention and visualisation sequence based on the report's recurring exercises.
+3. **Record what happens** — keep a private local field journal and pre-register predictions so experience, interpretation and outcome can be compared honestly.
 
-It includes:
+## Current feature set
 
-- a responsive, immersive landing experience;
-- a 29-page document decoder with plain-English summaries;
-- an evidence lens that distinguishes history, established concepts, metaphor and speculation;
-- a six-stage guided coherence practice;
-- intention and image-cue storage in the user's browser only;
-- timed breathing, step navigation and deliberate return-to-normal grounding;
-- accessibility and reduced-motion support;
-- clear independence, medical and scientific disclaimers.
-
-## Product structure
-
-### 1. Document decoder
-
-Each scanned page is treated as a distinct unit with four layers:
-
-1. what the page says;
-2. what it means in plain English;
-3. what is supported, debated or speculative;
-4. how its ideas translate into a safe attention or visualisation practice.
-
-### 2. Practice lab
-
-The practical sequence is:
-
-1. silence the verbal narrator;
-2. scan the body from head to toe;
-3. visualise a circulating head-to-feet-to-head energy loop;
-4. expand awareness to include body, room and surrounding space;
-5. hold one clear image of a completed outcome;
-6. release the image and deliberately return to ordinary orientation.
-
-The site does **not** claim that the report proves reality is a hologram or simulation, that thoughts guarantee external outcomes, or that paranormal abilities are established.
+- responsive, dependency-free static website;
+- searchable and filterable 29-page decoder;
+- original scanned PDF displayed at the corresponding page;
+- evidence labels separating grounded components, mixed extrapolations and speculative claims;
+- browser speech synthesis for page summaries and optional guided practice;
+- page progress stored locally;
+- 6, 12 and 18-minute guided coherence sessions;
+- body scan, head-to-toe circulation, expanded awareness, single-image patterning, release and return;
+- private local session records with before/after focus scores;
+- pre-registered signal experiments scored as hit, miss or ambiguous;
+- JSON and CSV journal export;
+- installable progressive web app with offline support for the site shell;
+- GitHub Pages deployment workflow;
+- reduced-motion, keyboard navigation and responsive layouts;
+- explicit scientific, medical and independence safeguards.
 
 ## Run locally
 
-No build step is required.
+The site has no build step.
 
 ```bash
 python -m http.server 8080
 ```
 
-Then open `http://localhost:8080`.
+Open `http://localhost:8080`.
 
-## Suggested next phase
+A local server is recommended because service workers and some PDF/browser features do not work correctly from a `file://` URL.
 
-- add authenticated journals and timestamped experiment logs;
-- add original-page image viewing beside each explanation;
-- source modern scientific commentary for every page;
-- add optional narrated sessions and licensed audio integrations;
-- create a structured content layer rather than keeping page data inside `index.html`;
-- add automated accessibility, HTML and browser tests.
+## Publish with GitHub Pages
+
+After merging to `main`:
+
+1. Open **Repository Settings → Pages**.
+2. Set **Source** to **GitHub Actions**.
+3. Run the `Deploy static site to Pages` workflow, or push another commit to `main`.
+
+## Data and privacy
+
+Practice settings, document progress, session records and experiments are stored only in the visitor's browser using `localStorage`. Nothing is sent to a server by this repository. Clearing site data removes the journal unless it has first been exported.
+
+## Product position
+
+The site treats the Gateway paper as a historically interesting assessment, not proof that:
+
+- the universe is literally a holographic simulation;
+- consciousness can reliably control external events;
+- out-of-body travel or access to future information has been demonstrated;
+- visualisation can diagnose or cure illness.
+
+The practical core is presented as attention training, relaxation, imagery, reflection and testable personal experimentation. Claims remain attributed to the report.
 
 ## Primary source
 
 CIA Reading Room document: `CIA-RDP96-00788R001700210016-5`.
+
+## Next development phase
+
+- locally hosted page images for a more reliable scan viewer;
+- per-page modern research citations and bibliography cross-links;
+- optional original narration and sound design with clear headphone safety;
+- encrypted account sync as an opt-in alternative to local-only storage;
+- automated accessibility, browser and performance tests;
+- shareable, redacted experiment reports without exposing private journal content.

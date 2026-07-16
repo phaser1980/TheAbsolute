@@ -1,0 +1,17 @@
+{
+  "name": "The Absolute — Gateway Process Decoded",
+  "short_name": "The Absolute",
+  "description": "An interactive, evidence-aware exploration and private field journal for the 1983 Gateway Process report.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#050711",
+  "theme_color": "#060914",
+  "icons": [
+    {
+      "src": "assets/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

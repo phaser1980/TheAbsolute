@@ -5,417 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#060914" />
   <meta name="description" content="The Absolute — an interactive, evidence-aware exploration of the 1983 Analysis and Assessment of Gateway Process." />
+  <meta property="og:title" content="The Absolute — Gateway Process, decoded" />
+  <meta property="og:description" content="Read the 29-page report beside the original scan, practise its grounded attention sequence, and record what actually happens." />
+  <meta property="og:type" content="website" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="assets/styles.css" />
   <title>The Absolute — Gateway Process, decoded</title>
-  <style>
-    :root {
-      color-scheme: dark;
-      --ink: #f4f7ff;
-      --muted: #aab5cf;
-      --dim: #74809c;
-      --bg: #050711;
-      --panel: rgba(14, 19, 38, .72);
-      --panel-strong: rgba(12, 17, 34, .94);
-      --line: rgba(183, 201, 255, .14);
-      --cyan: #7cf3ff;
-      --violet: #a992ff;
-      --gold: #ffd38a;
-      --green: #8ff0b3;
-      --danger: #ff9d9d;
-      --shadow: 0 28px 90px rgba(0, 0, 0, .46);
-      --radius: 24px;
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      min-height: 100vh;
-      overflow-x: hidden;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: var(--ink);
-      background:
-        radial-gradient(circle at 18% 12%, rgba(105, 77, 240, .22), transparent 28rem),
-        radial-gradient(circle at 82% 23%, rgba(53, 215, 231, .16), transparent 32rem),
-        linear-gradient(180deg, #050711 0%, #080b18 48%, #050711 100%);
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: -2;
-      opacity: .26;
-      background-image:
-        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
-      background-size: 46px 46px;
-      mask-image: radial-gradient(circle at center, black, transparent 82%);
-    }
-
-    #field {
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      opacity: .62;
-      pointer-events: none;
-    }
-
-    a { color: inherit; }
-    button, input, textarea, select { font: inherit; }
-    button { color: inherit; }
-
-    .shell { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
-
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 30;
-      border-bottom: 1px solid var(--line);
-      background: rgba(5, 7, 17, .76);
-      backdrop-filter: blur(18px);
-    }
-
-    .nav {
-      min-height: 68px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-    }
-
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-      font-weight: 760;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      font-size: .83rem;
-    }
-
-    .brand-mark {
-      width: 34px;
-      aspect-ratio: 1;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      background: conic-gradient(from 90deg, var(--cyan), var(--violet), transparent, var(--cyan));
-      box-shadow: 0 0 34px rgba(124, 243, 255, .34);
-    }
-
-    .brand-mark::after {
-      content: "";
-      width: 20px;
-      aspect-ratio: 1;
-      border-radius: 50%;
-      background: #080b18;
-      border: 1px solid rgba(255,255,255,.22);
-    }
-
-    .nav-links { display: flex; gap: 8px; align-items: center; }
-    .nav-links a {
-      text-decoration: none;
-      color: var(--muted);
-      padding: 10px 13px;
-      border-radius: 999px;
-      font-size: .9rem;
-    }
-    .nav-links a:hover { color: var(--ink); background: rgba(255,255,255,.06); }
-
-    .hero {
-      padding: clamp(72px, 10vw, 140px) 0 76px;
-      min-height: calc(100vh - 68px);
-      display: grid;
-      align-items: center;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.15fr) minmax(320px, .85fr);
-      gap: clamp(38px, 7vw, 90px);
-      align-items: center;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--cyan);
-      text-transform: uppercase;
-      letter-spacing: .18em;
-      font-size: .72rem;
-      font-weight: 760;
-      margin-bottom: 18px;
-    }
-
-    .eyebrow::before { content: ""; width: 34px; height: 1px; background: currentColor; }
-
-    h1 {
-      margin: 0;
-      font-size: clamp(4rem, 10vw, 8.6rem);
-      line-height: .82;
-      letter-spacing: -.075em;
-      max-width: 850px;
-      text-wrap: balance;
-    }
-
-    .gradient-text {
-      background: linear-gradient(105deg, #fff 8%, #bffaff 45%, #b9a8ff 80%, #fff);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .hero-copy {
-      max-width: 710px;
-      margin: 30px 0 0;
-      color: var(--muted);
-      font-size: clamp(1.05rem, 2vw, 1.3rem);
-      line-height: 1.65;
-    }
-
-    .hero-copy strong { color: var(--ink); font-weight: 680; }
-
-    .actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px; }
-    .button {
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.05);
-      color: var(--ink);
-      border-radius: 999px;
-      padding: 13px 18px;
-      font-weight: 680;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-flex;
-      gap: 9px;
-      align-items: center;
-      justify-content: center;
-      transition: transform .2s ease, background .2s ease, border-color .2s ease;
-    }
-    .button:hover { transform: translateY(-2px); border-color: rgba(124,243,255,.4); background: rgba(124,243,255,.08); }
-    .button.primary { background: linear-gradient(120deg, var(--cyan), #b5a8ff); color: #05101a; border-color: transparent; }
-    .button.small { padding: 9px 13px; font-size: .85rem; }
-
-    .signal-card {
-      position: relative;
-      min-height: 520px;
-      border: 1px solid var(--line);
-      border-radius: 36px;
-      background: linear-gradient(180deg, rgba(20,27,54,.68), rgba(8,11,24,.82));
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      display: grid;
-      place-items: center;
-      isolation: isolate;
-    }
-
-    .signal-card::before {
-      content: "";
-      position: absolute;
-      inset: 8%;
-      border-radius: 50%;
-      border: 1px solid rgba(124,243,255,.24);
-      box-shadow: 0 0 80px rgba(124,243,255,.18), inset 0 0 80px rgba(169,146,255,.12);
-      animation: pulse 7s ease-in-out infinite;
-    }
-
-    .signal-card::after {
-      content: "";
-      position: absolute;
-      width: 68%;
-      aspect-ratio: 1;
-      border-radius: 50%;
-      border: 1px solid rgba(169,146,255,.26);
-      transform: rotateX(68deg);
-      animation: orbit 15s linear infinite;
-    }
-
-    .torus {
-      width: min(300px, 70%);
-      aspect-ratio: 1;
-      border-radius: 50%;
-      position: relative;
-      background: radial-gradient(circle, transparent 24%, rgba(124,243,255,.14) 25%, rgba(169,146,255,.35) 48%, transparent 70%);
-      filter: drop-shadow(0 0 32px rgba(124,243,255,.25));
-      animation: breathe 8s ease-in-out infinite;
-    }
-
-    .torus::before, .torus::after {
-      content: "";
-      position: absolute;
-      inset: 9%;
-      border-radius: 50%;
-      border: 1px solid rgba(255,255,255,.28);
-      transform: rotateX(62deg);
-    }
-    .torus::after { transform: rotateY(62deg); border-color: rgba(124,243,255,.34); }
-
-    .signal-caption {
-      position: absolute;
-      left: 26px;
-      right: 26px;
-      bottom: 24px;
-      padding: 16px 18px;
-      border-radius: 18px;
-      background: rgba(4,7,17,.72);
-      border: 1px solid var(--line);
-      backdrop-filter: blur(12px);
-    }
-    .signal-caption span { display:block; color: var(--dim); font-size:.75rem; letter-spacing:.13em; text-transform:uppercase; margin-bottom:7px; }
-    .signal-caption strong { font-size: 1rem; line-height:1.45; }
-
-    @keyframes pulse { 50% { transform: scale(1.08); opacity: .58; } }
-    @keyframes breathe { 50% { transform: scale(1.08) rotate(5deg); } }
-    @keyframes orbit { to { transform: rotateX(68deg) rotateZ(360deg); } }
-
-    section { padding: 88px 0; }
-    .section-head { display: grid; grid-template-columns: .8fr 1.2fr; gap: 50px; align-items:end; margin-bottom: 36px; }
-    .section-head h2 { margin:0; font-size: clamp(2.5rem, 5vw, 5rem); line-height:.95; letter-spacing:-.055em; }
-    .section-head p { margin:0; color:var(--muted); line-height:1.7; max-width:680px; }
-
-    .truth-strip {
-      border-block: 1px solid var(--line);
-      background: rgba(255,255,255,.025);
-    }
-    .truth-grid { display:grid; grid-template-columns: repeat(3,1fr); gap:1px; background:var(--line); }
-    .truth-item { padding:26px; background:#080b18; }
-    .truth-item span { color:var(--cyan); font-size:.75rem; letter-spacing:.12em; text-transform:uppercase; }
-    .truth-item h3 { margin:12px 0 8px; font-size:1.15rem; }
-    .truth-item p { margin:0; color:var(--muted); line-height:1.58; font-size:.93rem; }
-
-    .reader-layout { display:grid; grid-template-columns: 300px minmax(0,1fr); gap:24px; align-items:start; }
-    .page-index {
-      position: sticky;
-      top: 92px;
-      max-height: calc(100vh - 120px);
-      overflow:auto;
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      background:var(--panel);
-      padding:14px;
-      scrollbar-width: thin;
-    }
-    .page-index button {
-      width:100%;
-      display:grid;
-      grid-template-columns:36px 1fr;
-      gap:10px;
-      align-items:center;
-      text-align:left;
-      border:0;
-      background:transparent;
-      color:var(--muted);
-      padding:10px;
-      border-radius:13px;
-      cursor:pointer;
-    }
-    .page-index button:hover, .page-index button.active { color:var(--ink); background:rgba(124,243,255,.08); }
-    .page-index .num { width:32px; aspect-ratio:1; display:grid; place-items:center; border-radius:50%; border:1px solid var(--line); font-size:.78rem; }
-    .page-index .label { font-size:.83rem; line-height:1.25; }
-
-    .reader-card {
-      min-height: 620px;
-      border:1px solid var(--line);
-      border-radius:32px;
-      background:linear-gradient(160deg, rgba(18,24,48,.9), rgba(7,10,22,.88));
-      box-shadow:var(--shadow);
-      padding:clamp(26px,5vw,58px);
-      position:relative;
-      overflow:hidden;
-    }
-    .reader-card::after { content:""; position:absolute; inset:auto -12% -45% auto; width:430px; aspect-ratio:1; border-radius:50%; background:radial-gradient(circle, rgba(124,243,255,.12), transparent 68%); pointer-events:none; }
-    .page-kicker { color:var(--cyan); letter-spacing:.15em; text-transform:uppercase; font-size:.74rem; font-weight:760; }
-    .reader-card h3 { margin:14px 0 18px; font-size:clamp(2.1rem,4vw,4.4rem); line-height:.98; letter-spacing:-.05em; max-width:800px; }
-    .page-summary { color:#dce4f7; line-height:1.75; font-size:1.08rem; max-width:800px; }
-    .lens-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:30px; }
-    .lens { border:1px solid var(--line); background:rgba(255,255,255,.035); padding:18px; border-radius:17px; }
-    .lens span { font-size:.7rem; text-transform:uppercase; letter-spacing:.12em; color:var(--dim); }
-    .lens p { margin:9px 0 0; color:var(--muted); line-height:1.55; font-size:.92rem; }
-    .status { display:inline-flex; align-items:center; gap:7px; margin-top:24px; border:1px solid var(--line); padding:8px 11px; border-radius:999px; font-size:.78rem; color:var(--muted); }
-    .status-dot { width:7px; aspect-ratio:1; border-radius:50%; background:var(--gold); box-shadow:0 0 14px currentColor; }
-    .reader-controls { display:flex; justify-content:space-between; gap:12px; margin-top:30px; }
-
-    .practice-wrap { display:grid; grid-template-columns:.9fr 1.1fr; gap:24px; }
-    .practice-panel, .practice-stage { border:1px solid var(--line); border-radius:30px; background:var(--panel); padding:clamp(24px,4vw,42px); }
-    .practice-panel h3, .practice-stage h3 { margin-top:0; font-size:1.7rem; letter-spacing:-.03em; }
-    .field-label { display:block; color:var(--muted); font-size:.82rem; margin:18px 0 8px; }
-    textarea, input, select {
-      width:100%;
-      color:var(--ink);
-      background:rgba(255,255,255,.045);
-      border:1px solid var(--line);
-      border-radius:14px;
-      padding:13px 14px;
-      outline:none;
-    }
-    textarea { resize:vertical; min-height:90px; }
-    textarea:focus, input:focus, select:focus { border-color:rgba(124,243,255,.52); box-shadow:0 0 0 3px rgba(124,243,255,.08); }
-    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-    .practice-note { color:var(--dim); font-size:.82rem; line-height:1.55; margin-top:18px; }
-
-    .orb-stage { min-height:300px; display:grid; place-items:center; position:relative; }
-    .breath-orb {
-      width:180px;
-      aspect-ratio:1;
-      border-radius:50%;
-      display:grid;
-      place-items:center;
-      text-align:center;
-      background:radial-gradient(circle at 35% 28%, rgba(255,255,255,.55), rgba(124,243,255,.28) 18%, rgba(169,146,255,.24) 48%, rgba(5,7,17,.06) 70%);
-      border:1px solid rgba(255,255,255,.28);
-      box-shadow:0 0 80px rgba(124,243,255,.18), inset 0 0 40px rgba(255,255,255,.08);
-      transition:transform 4s ease-in-out, box-shadow 1s ease;
-    }
-    .breath-orb.inhale { transform:scale(1.28); }
-    .breath-orb.exhale { transform:scale(.88); }
-    .breath-orb strong { font-size:2.1rem; letter-spacing:-.05em; }
-    .breath-orb span { display:block; color:var(--muted); font-size:.75rem; text-transform:uppercase; letter-spacing:.12em; margin-top:4px; }
-    .practice-step { color:var(--cyan); font-size:.75rem; text-transform:uppercase; letter-spacing:.15em; font-weight:760; }
-    .practice-instruction { color:#dce4f7; line-height:1.75; min-height:86px; }
-    .step-dots { display:flex; gap:8px; flex-wrap:wrap; margin:22px 0; }
-    .step-dots button { width:34px; aspect-ratio:1; border-radius:50%; border:1px solid var(--line); background:transparent; cursor:pointer; color:var(--muted); }
-    .step-dots button.active { background:var(--cyan); color:#06111b; border-color:transparent; }
-    .timer { font-variant-numeric:tabular-nums; font-size:2rem; letter-spacing:-.04em; }
-
-    .principles { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
-    .principle { border:1px solid var(--line); border-radius:22px; background:rgba(255,255,255,.03); padding:24px; }
-    .principle b { display:block; font-size:1.05rem; margin-bottom:9px; }
-    .principle p { color:var(--muted); margin:0; line-height:1.6; font-size:.91rem; }
-
-    footer { border-top:1px solid var(--line); padding:40px 0 60px; color:var(--dim); }
-    .footer-grid { display:flex; justify-content:space-between; gap:24px; align-items:flex-start; }
-    footer p { margin:0; max-width:760px; line-height:1.65; font-size:.86rem; }
-
-    .reveal { opacity:0; transform:translateY(20px); transition:opacity .7s ease, transform .7s ease; }
-    .reveal.visible { opacity:1; transform:none; }
-
-    @media (max-width: 900px) {
-      .hero-grid, .section-head, .reader-layout, .practice-wrap { grid-template-columns:1fr; }
-      .signal-card { min-height:420px; }
-      .page-index { position:relative; top:auto; max-height:300px; }
-      .lens-grid, .truth-grid, .principles { grid-template-columns:1fr; }
-      .nav-links a:not(.keep) { display:none; }
-    }
-
-    @media (max-width: 560px) {
-      .shell { width:min(100% - 20px,1180px); }
-      h1 { font-size:clamp(3.4rem,22vw,5rem); }
-      .hero { padding-top:72px; }
-      .form-row { grid-template-columns:1fr; }
-      .reader-controls { flex-direction:column; }
-      .button { width:100%; }
-      .actions .button { width:auto; }
-      .footer-grid { display:block; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { scroll-behavior:auto !important; animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; }
-    }
-  </style>
 </head>
 <body>
   <canvas id="field" aria-hidden="true"></canvas>
@@ -424,10 +20,12 @@
     <nav class="nav shell" aria-label="Primary navigation">
       <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"></span>The Absolute</a>
       <div class="nav-links">
-        <a href="#document">29 pages</a>
-        <a href="#practice">Practice lab</a>
+        <a href="#document">Decode</a>
+        <a href="#practice">Practice</a>
+        <a href="#journal">Journal</a>
         <a href="#grounding">Ground rules</a>
-        <a class="keep" href="https://www.cia.gov/readingroom/docs/CIA-RDP96-00788R001700210016-5.pdf" target="_blank" rel="noreferrer">Source ↗</a>
+        <button class="nav-install" id="installApp" type="button" hidden>Install</button>
+        <a class="keep" href="https://www.cia.gov/readingroom/docs/CIA-RDP96-00788R001700210016-5.pdf" target="_blank" rel="noreferrer">Original scan ↗</a>
       </div>
     </nav>
   </header>
@@ -438,7 +36,11 @@
         <div class="reveal">
           <div class="eyebrow">A 1983 document, decoded</div>
           <h1><span class="gradient-text">The<br>Absolute.</span></h1>
-          <p class="hero-copy">Lieutenant Colonel Wayne M. McDonnell tried to explain a radical proposition: that consciousness may be more than a passenger in physical reality. <strong>This site separates the report’s claims, its metaphors and its practical exercises—page by page.</strong></p>
+          <p class="hero-copy">Lieutenant Colonel Wayne M. McDonnell tried to explain a radical proposition: that consciousness may be more than a passenger in physical reality. <strong>Read the report beside the original scan, practise its grounded sequence, and record what actually happens.</strong></p>
+          <div class="hero-progress" aria-live="polite">
+            <span class="progress-ring" id="heroProgressRing">0</span>
+            <span><b id="heroProgressText">0 of 29 pages explored</b><small>Your progress stays in this browser.</small></span>
+          </div>
           <div class="actions">
             <a class="button primary" href="#document">Enter the document</a>
             <a class="button" href="#practice">Begin the sequence</a>
@@ -455,7 +57,7 @@
       <div class="shell truth-grid">
         <article class="truth-item"><span>What it is</span><h3>An Army assessment</h3><p>Written for US Army Intelligence and Security Command on 9 June 1983; later released through the CIA Reading Room.</p></article>
         <article class="truth-item"><span>What it is not</span><h3>Proof of a simulation</h3><p>The report blends real concepts, period neuroscience, metaphysics and speculative leaps. Declassification does not validate every claim.</p></article>
-        <article class="truth-item"><span>How to use this</span><h3>Explore, test, stay grounded</h3><p>Treat the exercises as attention, relaxation and visualisation practices—not as medical care or guaranteed access to paranormal abilities.</p></article>
+        <article class="truth-item"><span>How to use this</span><h3>Explore, test, stay grounded</h3><p>Treat the exercises as attention, relaxation and visualisation practices—not as medical care or guaranteed paranormal access.</p></article>
       </div>
     </div>
 
@@ -463,25 +65,48 @@
       <div class="shell">
         <div class="section-head reveal">
           <h2>The document,<br>one page at a time.</h2>
-          <p>The scan is dense, dated and often presented online without context. Select any page to see its role in the argument, a plain-English interpretation, an evidence note and a link to the practical sequence.</p>
+          <p>The explanation and the source now sit together. Search the report, filter by evidence status, listen to a summary, and open the corresponding scanned page without losing your place.</p>
         </div>
+
+        <div class="reader-tools reveal">
+          <label class="search-field"><span class="sr-only">Search pages</span><input id="pageSearch" type="search" placeholder="Search concepts: hologram, resonance, Focus 12…" /></label>
+          <label><span class="sr-only">Filter evidence status</span><select id="evidenceFilter"><option value="all">All evidence levels</option><option value="grounded">Grounded components</option><option value="mixed">Mixed / extrapolated</option><option value="speculative">Speculative claims</option></select></label>
+          <button class="button small" id="listenPage" type="button">Listen to summary</button>
+          <button class="button small" id="toggleScan" type="button" aria-expanded="true">Hide scan</button>
+        </div>
+
         <div class="reader-layout">
           <nav class="page-index reveal" id="pageIndex" aria-label="Document pages"></nav>
-          <article class="reader-card reveal" aria-live="polite">
-            <div class="page-kicker" id="pageKicker">Page 01 of 29</div>
-            <h3 id="pageTitle"></h3>
-            <p class="page-summary" id="pageSummary"></p>
-            <div class="lens-grid">
-              <div class="lens"><span>Plain English</span><p id="plainEnglish"></p></div>
-              <div class="lens"><span>Evidence lens</span><p id="evidenceLens"></p></div>
-              <div class="lens"><span>Practice link</span><p id="practiceLink"></p></div>
-            </div>
-            <div class="status"><i class="status-dot" id="statusDot"></i><span id="statusText"></span></div>
-            <div class="reader-controls">
-              <button class="button small" id="prevPage" type="button">← Previous page</button>
-              <button class="button small" id="nextPage" type="button">Next page →</button>
-            </div>
-          </article>
+          <div class="reader-stack">
+            <article class="reader-card reveal" aria-live="polite">
+              <div class="reader-meta">
+                <div class="page-kicker" id="pageKicker">Page 01 of 29</div>
+                <span class="visited-badge" id="visitedBadge">New page</span>
+              </div>
+              <h3 id="pageTitle"></h3>
+              <p class="page-summary" id="pageSummary"></p>
+              <div class="lens-grid">
+                <div class="lens"><span>Plain English</span><p id="plainEnglish"></p></div>
+                <div class="lens"><span>Evidence lens</span><p id="evidenceLens"></p></div>
+                <div class="lens"><span>Practice link</span><p id="practiceLink"></p></div>
+              </div>
+              <div class="reader-foot">
+                <div class="status"><i class="status-dot" id="statusDot"></i><span id="statusText"></span></div>
+                <a class="source-page-link" id="sourcePageLink" href="#" target="_blank" rel="noreferrer">Open scanned page ↗</a>
+              </div>
+              <div class="reader-controls">
+                <button class="button small" id="prevPage" type="button">← Previous page</button>
+                <span class="keyboard-hint">Keyboard: ← →</span>
+                <button class="button small" id="nextPage" type="button">Next page →</button>
+              </div>
+            </article>
+
+            <aside class="source-card reveal" id="sourceCard">
+              <div class="source-card-head"><div><span>Primary source</span><b id="sourceTitle">Original scan · page 1</b></div><a href="https://www.cia.gov/readingroom/docs/CIA-RDP96-00788R001700210016-5.pdf" target="_blank" rel="noreferrer">Full PDF ↗</a></div>
+              <iframe id="sourceFrame" title="Original Gateway Process PDF scan" loading="lazy"></iframe>
+              <p class="source-fallback">PDF preview blocked? Use <a id="sourceFallback" href="#" target="_blank" rel="noreferrer">open scanned page</a>.</p>
+            </aside>
+          </div>
         </div>
       </div>
     </section>
@@ -503,7 +128,11 @@
               <div><label class="field-label" for="duration">Session length</label><select id="duration"><option value="6">6 minutes</option><option value="12" selected>12 minutes</option><option value="18">18 minutes</option></select></div>
               <div><label class="field-label" for="anchor">Return anchor</label><input id="anchor" value="Open eyes. Feel feet. Name the room." /></div>
             </div>
-            <button class="button primary" type="submit" style="margin-top:20px">Save and begin</button>
+            <div class="form-row">
+              <div><label class="field-label" for="beforeFocus">Focus before</label><select id="beforeFocus"><option value="1">1 · scattered</option><option value="2">2</option><option value="3" selected>3 · neutral</option><option value="4">4</option><option value="5">5 · clear</option></select></div>
+              <label class="toggle-row"><input id="voiceGuidance" type="checkbox" /><span>Speak each step aloud</span></label>
+            </div>
+            <button class="button primary" type="submit">Save and begin</button>
             <p class="practice-note">Saved only in this browser. Stop if you feel distressed, dizzy or detached. Do not use while driving, operating equipment or when you need full external attention.</p>
           </form>
 
@@ -513,12 +142,67 @@
             <p class="practice-instruction" id="practiceInstruction"></p>
             <div class="orb-stage"><div class="breath-orb" id="breathOrb"><div><strong id="timer">02:00</strong><span id="breathWord">Ready</span></div></div></div>
             <div class="step-dots" id="stepDots" aria-label="Practice steps"></div>
-            <div class="actions" style="margin-top:0">
+            <div class="actions compact-actions">
               <button class="button primary" id="startPractice" type="button">Start</button>
               <button class="button" id="resetPractice" type="button">Reset</button>
               <button class="button" id="nextPractice" type="button">Next step</button>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="journal">
+      <div class="shell">
+        <div class="section-head reveal">
+          <h2>Record the signal.<br>Not the story.</h2>
+          <p>A private local journal turns a compelling experience into something you can inspect later. Record the state change, the practical next action and any prediction before the outcome is known.</p>
+        </div>
+
+        <div class="stats-grid reveal">
+          <article class="stat"><span>Completed sessions</span><b id="statSessions">0</b></article>
+          <article class="stat"><span>Minutes practised</span><b id="statMinutes">0</b></article>
+          <article class="stat"><span>Current streak</span><b id="statStreak">0 days</b></article>
+          <article class="stat"><span>Pages explored</span><b id="statPages">0 / 29</b></article>
+        </div>
+
+        <div class="journal-grid">
+          <form class="journal-panel reveal" id="reflectionForm">
+            <div class="panel-kicker">After a session</div>
+            <h3>Capture what changed</h3>
+            <label class="field-label" for="reflection">Raw observations</label>
+            <textarea id="reflection" placeholder="Sensations, images, thoughts or shifts—before interpreting them."></textarea>
+            <div class="form-row">
+              <div><label class="field-label" for="afterFocus">Focus after</label><select id="afterFocus"><option value="1">1 · scattered</option><option value="2">2</option><option value="3" selected>3 · neutral</option><option value="4">4</option><option value="5">5 · clear</option></select></div>
+              <div><label class="field-label" for="nextAction">One observable next action</label><input id="nextAction" placeholder="Email the person, make the sketch, book the meeting…" /></div>
+            </div>
+            <button class="button primary" type="submit">Save session record</button>
+            <p class="form-message" id="reflectionMessage" aria-live="polite"></p>
+          </form>
+
+          <form class="journal-panel reveal" id="experimentForm">
+            <div class="panel-kicker">Signal lab</div>
+            <h3>Pre-register a test</h3>
+            <label class="field-label" for="experimentQuestion">Question or target</label>
+            <input id="experimentQuestion" placeholder="What specific outcome am I testing?" />
+            <label class="field-label" for="experimentPrediction">Prediction written before the result</label>
+            <textarea id="experimentPrediction" placeholder="Specific enough to score as hit, miss or ambiguous."></textarea>
+            <div class="form-row">
+              <div><label class="field-label" for="experimentConfidence">Confidence</label><select id="experimentConfidence"><option value="50">50%</option><option value="60">60%</option><option value="70">70%</option><option value="80">80%</option><option value="90">90%</option></select></div>
+              <div><label class="field-label" for="experimentDate">Check on</label><input id="experimentDate" type="date" /></div>
+            </div>
+            <button class="button" type="submit">Lock prediction</button>
+            <p class="form-message" id="experimentMessage" aria-live="polite"></p>
+          </form>
+        </div>
+
+        <div class="records-panel reveal">
+          <div class="records-head">
+            <div><div class="panel-kicker">Local archive</div><h3>Your records</h3></div>
+            <div class="actions compact-actions"><button class="button small" id="exportJson" type="button">Export JSON</button><button class="button small" id="exportCsv" type="button">Export CSV</button><button class="button small danger-button" id="clearJournal" type="button">Clear local data</button></div>
+          </div>
+          <div class="record-tabs" role="tablist"><button class="active" type="button" data-record-tab="sessions">Sessions</button><button type="button" data-record-tab="experiments">Experiments</button></div>
+          <div id="recordsList" class="records-list"></div>
         </div>
       </div>
     </section>
@@ -535,7 +219,7 @@
           <article class="principle reveal"><b>Agency without blame</b><p>Visualisation may guide behaviour and perception. It does not mean people caused illness, trauma or misfortune through imperfect thoughts.</p></article>
           <article class="principle reveal"><b>No medical promises</b><p>Historical claims about healing are presented as claims. The site does not diagnose, treat or replace qualified care.</p></article>
           <article class="principle reveal"><b>Return is part of the method</b><p>Every session ends by orienting to body, room, time and ordinary responsibilities. Expansion without reintegration is incomplete.</p></article>
-          <article class="principle reveal"><b>Record what happened</b><p>Users can later compare expectations, impressions and outcomes—reducing hindsight bias and making the exploration more honest.</p></article>
+          <article class="principle reveal"><b>Pre-register extraordinary claims</b><p>Write predictions before results, define what counts as a hit, and keep misses. A belief that can explain every outcome cannot test itself.</p></article>
         </div>
       </div>
     </section>
@@ -543,171 +227,12 @@
 
   <footer>
     <div class="shell footer-grid">
-      <p><strong style="color:var(--ink)">The Absolute</strong> is an independent educational interpretation of a historical document. It is not affiliated with the CIA, US Army, Monroe Institute or Hemi-Sync. It does not establish that reality is a simulation, that consciousness controls external events, or that paranormal abilities are reproducible.</p>
-      <p>Foundation prototype · 2026</p>
+      <p><strong>The Absolute</strong> is an independent educational interpretation of a historical document. It is not affiliated with the CIA, US Army, Monroe Institute or Hemi-Sync. It does not establish that reality is a simulation, that consciousness controls external events, or that paranormal abilities are reproducible.</p>
+      <p>Interactive field notebook · 2026</p>
     </div>
   </footer>
 
-  <script>
-    const pages = [
-      {title:'Mission brief',summary:'McDonnell explains the task: assess the mechanics and practical value of the Gateway Experience. To do that, he says he had to build a model spanning biomedical ideas, quantum mechanics, consciousness, time-space and out-of-body experience.',plain:'This is the memo’s contract with the reader. It announces a very ambitious attempt to make extraordinary claims sound physically coherent.',evidence:'The authorship, date and military context are historical facts. The proposed scientific synthesis is an argument, not validation.',practice:'Begin with a question. Separate what you experienced, what you inferred and what you hope is true.',status:'Historical frame · speculative programme',tone:'gold'},
-      {title:'A note on intuition',summary:'The introduction continues by asking the reader to combine logic with intuitive, pattern-based thinking. It also argues that Gateway need not conflict with mainstream Eastern or Western belief systems.',plain:'The report anticipates disbelief and asks for a different mode of reading before the technical case begins.',evidence:'“Left brain versus right brain” personality language is an oversimplification. Both hemispheres participate in most complex tasks.',practice:'Quiet commentary without switching off critical judgment. Observe an image or sensation before naming it.',status:'Rhetorical frame · dated neuroscience',tone:'gold'},
-      {title:'Hypnosis and the hemispheres',summary:'Gateway is introduced through comparison with hypnosis, meditation and biofeedback. Hypnosis is described as reducing verbal, critical filtering so suggestion can influence imagery, emotion and bodily response.',plain:'The document starts with familiar altered-attention methods to create a bridge toward Gateway.',evidence:'Suggestion can affect perception and some physiological responses. The page’s strict left/right division is too simplistic.',practice:'Use neutral self-suggestions: “For the next minute, I can let thoughts pass without following them.”',status:'Mixed · real effects, overstated model',tone:'gold'},
-      {title:'Brain map exhibit',summary:'An anatomical exhibit shows the sensory and motor homunculus, cerebral ventricles and nearby brain structures used in Bentov’s explanatory model.',plain:'This page gives the theory a biological-looking map: body sensations correspond to organised regions of cortex.',evidence:'The homunculus and mapped cortices are established anatomy. The later resonance claims built on the diagram are not established by the diagram itself.',practice:'Run attention slowly from toes to scalp and notice how clearly each region can be represented.',status:'Established anatomy · speculative application',tone:'green'},
-      {title:'Meditation and biofeedback',summary:'The report describes a proposed Kundalini-like current moving through the body and brain, then contrasts it with biofeedback: deliberate imagery paired with measurable feedback to learn control over a response.',plain:'One method bypasses analysis through prolonged concentration; the other recruits analysis and measurement to train a response.',evidence:'Biofeedback has evidence for selected uses. Claims about curing tumours or a literal cortical energy current are unsupported here.',practice:'Pair imagery with something observable: breathing rate, muscle tension or warmth in the hands.',status:'Mixed · useful method, extreme claims',tone:'gold'},
-      {title:'Hemi-Sync and the laser mind',summary:'Gateway is defined as training intended to make activity across the hemispheres more coherent. The report compares an ordinary mind to a diffuse lamp and a focused mind to a laser.',plain:'The product promise is coherence: less scattered attention, more stable focus and stronger subjective signal.',evidence:'Audio can influence arousal and attention. Claims that coherence lets consciousness escape time-space remain speculative.',practice:'Choose one sensory target—breath, tone or image—and repeatedly return to it without strain.',status:'Plausible attention effect · speculative reach',tone:'gold'},
-      {title:'Frequency following response',summary:'The page explains auditory entrainment and binaural beats: different tones presented to each ear produce a perceived difference frequency, intended to encourage relaxation and altered attention.',plain:'Sound is used as scaffolding. It gives the mind a repeating pattern around which attention can organise.',evidence:'Binaural beats are perceptually real; studies on cognitive or mood benefits are mixed and generally modest.',practice:'Headphones are optional. A steady ambient sound, metronome or counted breath can serve the same attentional role.',status:'Real phenomenon · uncertain benefits',tone:'green'},
-      {title:'Resonance and the Earth',summary:'Bentov’s model links deep relaxation, heartbeat-related vibration, brain stimulation and a proposed resonance near the Earth-ionosphere frequency range.',plain:'The body is portrayed as an oscillator that becomes quieter, more regular and more coupled to its environment.',evidence:'The Schumann resonances are real atmospheric electromagnetic phenomena. A direct mechanism coupling human consciousness to them is not established.',practice:'Use “Earth coherence” as grounding imagery: feel contact points, gravity, temperature and the room around you.',status:'Real geophysics · unproven human coupling',tone:'gold'},
-      {title:'Energy, matter and consciousness',summary:'The report moves from bodily resonance to a broader claim that matter is organised energy and consciousness is an interacting energy system. It then introduces holography as the model for storing and retrieving meaning.',plain:'The argument zooms out: body, mind and universe are described as patterns rather than separate solid things.',evidence:'Matter-energy equivalence and quantum fields are real physics. They do not by themselves imply that thought controls external reality.',practice:'Visualise the body as changing sensation and process rather than a fixed object—while keeping the exercise metaphorical.',status:'Valid physics premise · speculative conclusion',tone:'gold'},
-      {title:'The hologram',summary:'A pebble-and-water example explains how an interference pattern can encode a three-dimensional image. The page emphasises that each fragment of a hologram contains information about the whole.',plain:'A pattern can distribute information across its entire surface rather than store each detail in only one location.',evidence:'Optical holography is established. Extending it to a literal universal information field is a hypothesis.',practice:'Hold one complete scene rather than a list of instructions. Let the image carry context, emotion and meaning together.',status:'Established optics · metaphysical extension',tone:'green'},
-      {title:'Consciousness as comparison',summary:'Using ideas associated with Pribram and Bohm, the report proposes that mind reads a universal hologram by matching incoming patterns against memory. Coherent hemispheres supposedly improve that decoding.',plain:'Perception is framed as pattern recognition: notice input, compare it with prior models, produce meaning.',evidence:'Brains do use prediction and comparison. A universal hologram accessible beyond the senses has not been demonstrated.',practice:'When an impression arises, record the raw impression before comparing it with memory or expectation.',status:'Modern cognitive overlap · speculative field',tone:'gold'},
-      {title:'Hemisphere grid exhibit',summary:'A diagram assigns complementary roles to the hemispheres: holistic three-dimensional pattern reception and verbal, binary reduction into concepts.',plain:'The exhibit visualises intuition and analysis as two grids that work best when coordinated.',evidence:'Functional lateralisation exists, but the clean split shown here is a teaching metaphor, not a complete brain model.',practice:'First see the whole image. Then describe it in one sentence. Alternate perception and language deliberately.',status:'Teaching model · oversimplified anatomy',tone:'gold'},
-      {title:'Time, space and the Absolute',summary:'The paper defines time as change and space as bounded location, then imagines unbounded, motionless, conscious energy outside both. It names this state “the Absolute.”',plain:'The Absolute is the report’s zero point: no separation, no before or after, and no moving pattern to observe.',evidence:'This is metaphysics presented with physics vocabulary. It is not an experimentally established physical state of consciousness.',practice:'Try a brief “no task” interval: no outcome, no story, simply notice awareness and whatever appears within it.',status:'Metaphysical model',tone:'danger'},
-      {title:'The “click-out” hypothesis',summary:'The report argues that extremely coherent oscillation could create near-continuous instants of rest, allowing consciousness to “click out” of time-space. It invokes Planck-scale language and quantum nonlocality.',plain:'Tiny pauses between oscillations are imagined as doorways into dimensions where ordinary distance and time do not apply.',evidence:'Planck length does not mean oscillating systems periodically leave space-time. The report’s inference is not accepted physics.',practice:'Translate this into attention practice: notice the small gap after an exhale or between two thoughts without assigning supernatural meaning.',status:'Speculative physics analogy',tone:'danger'},
-      {title:'Planck-distance exhibit',summary:'A diagram depicts oscillating energy in time-space, a “clicked out” segment traversing an intermediate dimension, and the Absolute at infinity.',plain:'This is the memo’s doorway graphic—a visual summary of its proposed route beyond ordinary perception.',evidence:'The diagram is conceptual artwork, not a measured mechanism or validated scientific model.',practice:'Use diagrams to organise an experience, not to mistake a compelling picture for proof.',status:'Conceptual exhibit',tone:'danger'},
-      {title:'Between time-space and the Absolute',summary:'The report imagines intermediate dimensions where causality, sequence and distance become irregular. It proposes that out-of-body experience may provide a more effective starting point for exploring them.',plain:'Once ordinary coordinates are removed, the author says past and future may become accessible as information.',evidence:'Altered states can change time perception and body ownership. Objective travel beyond the body or access to other dimensions is unproven.',practice:'Explore changed perception safely: eyes closed, body still, then compare subjective duration with clock time.',status:'Subjective phenomena · paranormal claim',tone:'danger'},
-      {title:'The cosmic egg',summary:'The argument recaps the Absolute, then uses a torus or cosmic-egg model: energy emerges, evolves through time and returns, creating a universal interference pattern.',plain:'Reality is pictured as one continuous circulation rather than a straight line from beginning to end.',evidence:'The cosmology is a period speculative synthesis, not the modern scientific model of the universe.',practice:'Visualise energy moving down around the body and returning upward as a closed loop—the report’s “energy balloon” precursor.',status:'Speculative cosmology',tone:'danger'},
-      {title:'Torus exhibit',summary:'Quasar imagery and a stylised torus diagram illustrate matter emerging, curving through a cosmic cycle and returning toward the opposite pole.',plain:'The page turns a difficult cosmological argument into a memorable looped shape.',evidence:'Quasars and astrophysical jets are real. The illustrated universal flow does not follow from them.',practice:'A torus remains a useful visual anchor: outward expansion, downward circulation, inward return, upward renewal.',status:'Real observation · unsupported extrapolation',tone:'gold'},
-      {title:'Past, present and future at once',summary:'Because every stage of the torus supposedly contributes to one hologram, the report argues that past, present and future coexist as readable information. It then describes consciousness as eternal and distinct from the body.',plain:'This page contains the big promise: a sufficiently altered observer might read the whole pattern rather than one moment.',evidence:'Block-universe interpretations exist in physics, but they do not establish human access to future information or personal immortality.',practice:'Use future imagery as rehearsal. Ask what behaviour today would be consistent with the completed outcome.',status:'Philosophical possibility · unproven access',tone:'danger'},
-      {title:'Our place in time exhibit',summary:'A second cosmic diagram places the observable universe within the proposed toroidal flow and supports the claim that all phases of time contribute to one pattern.',plain:'The observer is located inside the model rather than looking at it from outside.',evidence:'This is not a contemporary map of cosmology. Its value is explanatory within the memo’s internal logic.',practice:'Locate yourself precisely now: date, room, body position, current obligation. Expansion begins with orientation.',status:'Conceptual exhibit',tone:'danger'},
-      {title:'Gateway preparation sequence',summary:'The document turns from theory to method: place concerns in an energy conversion box, hum for resonant tuning, repeat an affirmation, enter Hemi-Sync, relax progressively and form an energy balloon flowing from head to feet and back upward.',plain:'The preparation reduces cognitive load, regulates breathing, creates ritual and gives the body a single coherent image.',evidence:'Relaxation, humming, imagery and ritual can alter state and attention. Protective energy fields are subjective constructs.',practice:'This is the core sequence implemented below: contain distractions, tone, relax, circulate, expand, return.',status:'Practical relaxation · metaphysical framing',tone:'green'},
-      {title:'Focus 12: problem solving and patterning',summary:'In expanded awareness, the participant projects a problem outward and waits for insight. Patterning adds a vivid desired outcome held as already achieved, then released into the proposed universal hologram.',plain:'Stop wrestling verbally. Build one complete representation, allow associative processing, then return later for the answer.',evidence:'Incubation and mental rehearsal can help problem solving and performance. Thought alone is not proven to rearrange external reality.',practice:'Use one clear image of completion, then identify the next observable action that image implies.',status:'Useful cognitive tools · magical-causation risk',tone:'gold'},
-      {title:'Colour, energy bar and body map',summary:'The report presents colour breathing, a luminous “energy bar,” remote viewing imagery and a living body map for directing attention toward body systems.',plain:'These are symbolic interfaces: colour, shape and motion give nonverbal attention something precise to do.',evidence:'Imagery can influence stress and subjective symptoms. It should not be represented as curing disease or replacing treatment.',practice:'Choose a colour as an attention cue. Move it through the body scan without making medical claims.',status:'Imagery practice · unsupported healing claims',tone:'gold'},
-      {title:'Focus 15, Focus 21 and OBE',summary:'Focus 15 is presented as access to the past; Focus 21 as a boundary beyond time-space oriented toward the future. The report then lists imagined rolling, lifting and sliding methods for separating consciousness from the body.',plain:'The training ladder progresses from relaxation to expanded attention, non-time imagery and finally out-of-body interpretation.',evidence:'Time distortion, lucid dreams and out-of-body sensations can occur. Veridical travel outside the body has not been reliably demonstrated.',practice:'Treat unusual sensations as experiences to observe and record, not immediate proof of a literal interpretation.',status:'Altered-state phenomena · unverified ontology',tone:'danger'},
-      {title:'REM sleep and information collection',summary:'The report links REM sleep with natural out-of-body states and proposes three conditions: profound bodily quiet, hemispheric synchronisation and heightened right-hemisphere alertness. It then acknowledges failures in perfect target reading.',plain:'The document admits a practical problem: vivid experience does not guarantee accurate information.',evidence:'REM involves vivid dreams and altered body modelling. Claims that everyone leaves the body during REM are unsupported.',practice:'Keep a timestamped journal. Score specific predictions before knowing the answer to avoid selective memory.',status:'Established sleep state · paranormal interpretation',tone:'gold'},
-      {title:'Distortion and belief systems',summary:'The report lists possible sources of error—past impressions, thought forms and reversed holographic perception—then compares its worldview with Tibetan Buddhist, Hindu, Jewish mystical and Christian ideas.',plain:'When results are wrong, the model explains error as interference. The memo also seeks cultural legitimacy through parallels with older traditions.',evidence:'A theory that explains every miss can become unfalsifiable. Similarity to a belief system does not provide empirical confirmation.',practice:'Predefine what would count as a hit, miss or ambiguous result before an exercise.',status:'Important epistemic warning',tone:'danger'},
-      {title:'The archival gap and motivation',summary:'The released scan jumps from paragraph 34 to 37; sections 35 and 36 are absent. What remains argues that Gateway motivates continued practice by producing feedback faster than traditional disciplines and by reducing stress-related “blockages.”',plain:'This page is evidence that the archive itself is incomplete. The surviving argument says early subjective results keep participants engaged.',evidence:'Missing text should be labelled missing—not reconstructed as certainty. Practice effects and expectancy can both create rapid feedback.',practice:'Track benefits such as calm, focus and sleep separately from extraordinary interpretations.',status:'Archival gap · surviving conclusion',tone:'gold'},
-      {title:'Operational recommendations',summary:'The conclusion proposes a phased programme combining Hemi-Sync, REM induction, hypnosis, out-of-body practice, Focus 15/21 exploration, multiple observers and protective group visualisations.',plain:'The report ends not with proof, but with a proposed experimental roadmap for military exploitation.',evidence:'Several recommendations would require modern ethics review, controls, preregistration and independent replication. The report itself is not a successful trial.',practice:'Use the safe core only: relaxation, focused imagery, journalling, objective checks and deliberate return.',status:'Historical proposal · not a protocol to copy',tone:'danger'},
-      {title:'Bibliography',summary:'The final page lists the books, articles and Monroe Institute materials that shaped the report, including Itzhak Bentov, Robert Monroe, Charles Tart, Marilyn Ferguson and Jill Purce.',plain:'The bibliography reveals the memo’s intellectual mixture: popular science, altered-state research, spiritual traditions and internal programme material.',evidence:'A source list lets readers audit the lineage of an argument. It does not guarantee that later conclusions accurately follow from those sources.',practice:'Read upstream. Compare the original source, modern research and your own recorded experience.',status:'Historical sources',tone:'green'}
-    ];
-
-    const practiceSteps = [
-      {title:'Let language become background noise.', instruction:'Sit or lie down safely. Exhale longer than you inhale. Each time the mind narrates, label it “words” and return to the physical feeling of breathing. The aim is not to destroy thought—only to stop feeding every sentence.'},
-      {title:'Map the body from head to toe.', instruction:'Place attention at the crown. Move slowly through face, throat, chest, abdomen, hips, legs and feet. Notice pressure, temperature and tension without trying to fix anything.'},
-      {title:'Complete the circulation.', instruction:'Imagine a smooth current descending around the outside of the body from crown to feet, then returning upward through the centre. Use the Earth-field language as grounding imagery, not a claim you must believe.'},
-      {title:'Expand the field of awareness.', instruction:'Keep the body in awareness while including sound, space and the room at the same time. Nothing needs to disappear. Let attention become wide, quiet and inclusive.'},
-      {title:'Project one completed pattern.', instruction:'Bring up your single clear image of completion. See it as a still frame, not a movie of effort. Add the ordinary sensory detail that makes it feel specific, while remembering that imagery guides action rather than guarantees reality.'},
-      {title:'Release, return and repeat later.', instruction:'Drop the image. Do not chase a sign. Feel your feet, open your eyes, name the room and the date, then write one practical next action. The return to ordinary consciousness is part of the protocol.'}
-    ];
-
-    let page = 0;
-    const pageIndex = document.getElementById('pageIndex');
-    const statusDot = document.getElementById('statusDot');
-    const toneMap = {green:'var(--green)', gold:'var(--gold)', danger:'var(--danger)'};
-
-    function renderPageIndex() {
-      pageIndex.innerHTML = pages.map((item,i)=>`<button type="button" data-page="${i}" class="${i===page?'active':''}"><span class="num">${String(i+1).padStart(2,'0')}</span><span class="label">${item.title}</span></button>`).join('');
-      pageIndex.querySelectorAll('button').forEach(button=>button.addEventListener('click',()=>{page=Number(button.dataset.page); renderPage();}));
-    }
-
-    function renderPage() {
-      const item = pages[page];
-      document.getElementById('pageKicker').textContent = `Page ${String(page+1).padStart(2,'0')} of 29`;
-      document.getElementById('pageTitle').textContent = item.title;
-      document.getElementById('pageSummary').textContent = item.summary;
-      document.getElementById('plainEnglish').textContent = item.plain;
-      document.getElementById('evidenceLens').textContent = item.evidence;
-      document.getElementById('practiceLink').textContent = item.practice;
-      document.getElementById('statusText').textContent = item.status;
-      statusDot.style.background = toneMap[item.tone];
-      statusDot.style.color = toneMap[item.tone];
-      document.getElementById('prevPage').disabled = page === 0;
-      document.getElementById('nextPage').disabled = page === pages.length - 1;
-      renderPageIndex();
-      const active = pageIndex.querySelector('.active');
-      if (active) active.scrollIntoView({block:'nearest'});
-    }
-
-    document.getElementById('prevPage').addEventListener('click',()=>{if(page>0){page--;renderPage();}});
-    document.getElementById('nextPage').addEventListener('click',()=>{if(page<pages.length-1){page++;renderPage();}});
-
-    let practiceIndex = 0;
-    let running = false;
-    let interval = null;
-    let remaining = 120;
-    let breathPhase = 0;
-    const orb = document.getElementById('breathOrb');
-
-    function secondsPerStep() { return Math.round(Number(document.getElementById('duration').value) * 60 / practiceSteps.length); }
-    function formatTime(value) { const m=Math.floor(value/60); const s=value%60; return `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`; }
-
-    function renderPractice(resetTime=true) {
-      const item = practiceSteps[practiceIndex];
-      document.getElementById('practiceStep').textContent = `Step ${practiceIndex+1} · ${['Silence the narrator','Body scan','Energy circulation','Expanded awareness','Pattern projection','Release and return'][practiceIndex]}`;
-      document.getElementById('practiceTitle').textContent = item.title;
-      let instruction = item.instruction;
-      if (practiceIndex === 4) {
-        const intention = document.getElementById('intention').value.trim();
-        const cue = document.getElementById('imageCue').value.trim();
-        if (intention || cue) instruction += ` Your saved pattern: ${intention || 'your chosen outcome'}${cue ? `. Image cue: ${cue}.` : '.'}`;
-      }
-      if (practiceIndex === 5) instruction += ` Return anchor: ${document.getElementById('anchor').value || 'Open eyes. Feel feet. Name the room.'}`;
-      document.getElementById('practiceInstruction').textContent = instruction;
-      if (resetTime) remaining = secondsPerStep();
-      document.getElementById('timer').textContent = formatTime(remaining);
-      document.getElementById('stepDots').innerHTML = practiceSteps.map((_,i)=>`<button type="button" aria-label="Go to practice step ${i+1}" data-step="${i}" class="${i===practiceIndex?'active':''}">${i+1}</button>`).join('');
-      document.querySelectorAll('#stepDots button').forEach(b=>b.addEventListener('click',()=>{stopPractice();practiceIndex=Number(b.dataset.step);renderPractice();}));
-    }
-
-    function tick() {
-      remaining--;
-      breathPhase = (breathPhase + 1) % 8;
-      const inhale = breathPhase < 4;
-      orb.classList.toggle('inhale', inhale);
-      orb.classList.toggle('exhale', !inhale);
-      document.getElementById('breathWord').textContent = inhale ? 'Inhale' : 'Exhale';
-      document.getElementById('timer').textContent = formatTime(Math.max(0,remaining));
-      if (remaining <= 0) {
-        if (practiceIndex < practiceSteps.length-1) { practiceIndex++; renderPractice(true); }
-        else { stopPractice(); document.getElementById('breathWord').textContent='Complete'; }
-      }
-    }
-
-    function startPractice() {
-      if (running) { stopPractice(); return; }
-      running=true;
-      document.getElementById('startPractice').textContent='Pause';
-      document.getElementById('breathWord').textContent='Inhale';
-      interval=setInterval(tick,1000);
-    }
-    function stopPractice() {
-      running=false;
-      clearInterval(interval);
-      interval=null;
-      document.getElementById('startPractice').textContent='Start';
-      orb.classList.remove('inhale','exhale');
-    }
-
-    document.getElementById('startPractice').addEventListener('click',startPractice);
-    document.getElementById('resetPractice').addEventListener('click',()=>{stopPractice();practiceIndex=0;renderPractice(true);document.getElementById('breathWord').textContent='Ready';});
-    document.getElementById('nextPractice').addEventListener('click',()=>{stopPractice();practiceIndex=(practiceIndex+1)%practiceSteps.length;renderPractice(true);});
-    document.getElementById('duration').addEventListener('change',()=>renderPractice(true));
-
-    document.getElementById('intentionForm').addEventListener('submit',(event)=>{
-      event.preventDefault();
-      const values = ['intention','imageCue','duration','anchor'].reduce((acc,id)=>{acc[id]=document.getElementById(id).value;return acc;},{});
-      localStorage.setItem('theAbsolutePractice', JSON.stringify(values));
-      practiceIndex=0; renderPractice(true); startPractice();
-      document.querySelector('.practice-stage').scrollIntoView({behavior:'smooth',block:'center'});
-    });
-
-    try {
-      const saved=JSON.parse(localStorage.getItem('theAbsolutePractice'));
-      if(saved) Object.entries(saved).forEach(([id,value])=>{const el=document.getElementById(id);if(el)el.value=value;});
-    } catch (_) {}
-
-    const observer = new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting)entry.target.classList.add('visible');}),{threshold:.12});
-    document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
-
-    const canvas=document.getElementById('field');
-    const ctx=canvas.getContext('2d');
-    let particles=[];
-    function resize(){canvas.width=innerWidth*devicePixelRatio;canvas.height=innerHeight*devicePixelRatio;canvas.style.width=innerWidth+'px';canvas.style.height=innerHeight+'px';ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);particles=Array.from({length:Math.min(90,Math.floor(innerWidth/14))},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*1.4+.2,v:Math.random()*.16+.04,a:Math.random()*.45+.08}));}
-    function draw(){ctx.clearRect(0,0,innerWidth,innerHeight);particles.forEach(p=>{p.y-=p.v;if(p.y<-8){p.y=innerHeight+8;p.x=Math.random()*innerWidth;}ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(185,215,255,${p.a})`;ctx.fill();});requestAnimationFrame(draw);}
-    addEventListener('resize',resize,{passive:true});resize();draw();
-
-    renderPage();
-    renderPractice(true);
-  </script>
+  <script src="data/pages.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>
