@@ -3,7 +3,7 @@
   const LOCAL_PDF = 'assets/source/gateway-process.pdf';
   const frame = document.getElementById('sourceFrame');
   const title = document.getElementById('sourceTitle');
-  let activePdf = REMOTE_PDF;
+  let activePdf = LOCAL_PDF;
 
   function currentScanPage() {
     const match = title?.textContent.match(/page\s+(\d+)/i);
@@ -28,33 +28,48 @@
     if (caseLink) caseLink.href = `${pdf}#page=26`;
   }
 
-  async function preferLocalArchive() {
+  function showLocalBadge() {
+    const sourceHead = document.querySelector('.source-card-head div');
+    if (sourceHead && !sourceHead.querySelector('.local-source-badge')) {
+      const badge = document.createElement('em');
+      badge.className = 'local-source-badge';
+      badge.textContent = 'Local archive';
+      sourceHead.appendChild(badge);
+    }
+  }
+
+  async function resolveArchive() {
     try {
       const response = await fetch(LOCAL_PDF, {method:'HEAD', cache:'no-store'});
-      if (!response.ok) throw new Error('not uploaded');
+      if (!response.ok) throw new Error('local archive unavailable');
       activePdf = LOCAL_PDF;
       setSourceLinks(activePdf);
       loadScan();
-      const sourceHead = document.querySelector('.source-card-head div');
-      if (sourceHead && !sourceHead.querySelector('.local-source-badge')) {
-        const badge = document.createElement('em');
-        badge.className = 'local-source-badge';
-        badge.textContent = 'Local archive';
-        sourceHead.appendChild(badge);
-      }
+      showLocalBadge();
     } catch (_) {
+      activePdf = REMOTE_PDF;
+      setSourceLinks(activePdf);
+      loadScan();
       const fallback = document.querySelector('.source-fallback');
       if (fallback && !fallback.querySelector('.source-setup')) {
         const note = document.createElement('span');
         note.className = 'source-setup';
-        note.innerHTML = '<strong>Local archive pending.</strong> Add the supplied PDF at <code>assets/source/gateway-process.pdf</code> to remove CIA embed blocking.';
+        note.innerHTML = '<strong>Local archive unavailable.</strong> Expected <code>assets/source/gateway-process.pdf</code>.';
         fallback.append(' ', note);
       }
     }
   }
 
-  if (title) new MutationObserver(() => { setSourceLinks(activePdf); loadScan(); }).observe(title, {childList:true, characterData:true,subtree:true});
-  preferLocalArchive();
+  if (title) {
+    new MutationObserver(() => {
+      setSourceLinks(activePdf);
+      loadScan();
+    }).observe(title, {childList:true, characterData:true,subtree:true});
+  }
+
+  setSourceLinks(activePdf);
+  loadScan();
+  resolveArchive();
 
   document.getElementById('openCaseNotes')?.addEventListener('click', () => {
     document.getElementById('journal')?.scrollIntoView({behavior:'smooth'});
