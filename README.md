@@ -11,8 +11,8 @@ The product has three connected jobs:
 ## Current feature set
 
 - responsive, dependency-free static website;
-- searchable and filterable 29-page decoder;
-- original scanned PDF displayed at the corresponding page;
+- searchable and filterable 29-page reader, each page condensed to one clear step plus a plain-English and evidence note;
+- a single link to the original scanned PDF for anyone who wants the primary source, rather than a page-synced viewer;
 - evidence labels separating grounded components, mixed extrapolations and speculative claims;
 - browser speech synthesis for page summaries and optional guided practice;
 - page progress stored locally;
@@ -63,7 +63,9 @@ The practical core is presented as attention training, relaxation, imagery, refl
 
 ## Primary source
 
-CIA Reading Room document: `CIA-RDP96-00788R001700210016-5`.
+CIA Reading Room document: `CIA-RDP96-00788R001700210016-5`. A copy is committed at `assets/source/gateway-process.pdf` and linked directly from the site; the CIA's own hosted copy is not required.
+
+The site's own scan has a documented gap: the internal page numbering jumps from report page 24 to 26, with paragraph 34 cut off mid-sentence and paragraphs 35–36 absent. The `#missing-page` section on the site treats that as evidence to investigate rather than text to silently reconstruct. Any recovered version of the missing leaf should only be incorporated with documented provenance — source holder, original image, custody history, publication history and a confidence assessment; a transcription alone should not silently replace it.
 
 ## Next development phase
 

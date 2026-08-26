@@ -3,7 +3,6 @@
 
   const pages = window.ABSOLUTE_PAGES || [];
   const practiceSteps = window.ABSOLUTE_PRACTICE_STEPS || [];
-  const SOURCE_PDF = 'https://www.cia.gov/readingroom/docs/CIA-RDP96-00788R001700210016-5.pdf';
   const STORAGE = {
     practice: 'theAbsolutePracticeV2',
     visited: 'theAbsoluteVisitedPages',
@@ -30,8 +29,6 @@
   let speech = null;
 
   const toneMap = {grounded:'var(--green)', mixed:'var(--gold)', speculative:'var(--danger)'};
-
-  function pageUrl(index) { return `${SOURCE_PDF}#page=${index + 1}&zoom=page-width`; }
 
   function applyPageFilter() {
     const query = $('pageSearch').value.trim().toLowerCase();
@@ -84,19 +81,11 @@
     $('visitedBadge').textContent = alreadyVisited ? 'Explored' : 'New page';
     $('visitedBadge').classList.toggle('done', alreadyVisited);
 
-    const source = pageUrl(page);
-    $('sourcePageLink').href = source;
-    $('sourceFallback').href = source;
-    $('sourceTitle').textContent = `Original scan · page ${page + 1}`;
-    if (!$('sourceCard').hidden) $('sourceFrame').src = source;
-
     const position = filteredPageIndexes.indexOf(page);
     $('prevPage').disabled = position <= 0;
     $('nextPage').disabled = position < 0 || position >= filteredPageIndexes.length - 1;
     markVisited(page);
     renderPageIndex();
-    $('visitedBadge').textContent = 'Explored';
-    $('visitedBadge').classList.add('done');
     if (scrollIndex) $('pageIndex').querySelector('.active')?.scrollIntoView({block:'nearest'});
   }
 
@@ -129,13 +118,6 @@
   $('prevPage').addEventListener('click', () => movePage(-1));
   $('nextPage').addEventListener('click', () => movePage(1));
   $('listenPage').addEventListener('click', () => toggleSpeech(`${pages[page].title}. ${pages[page].summary} Evidence note. ${pages[page].evidence}`, $('listenPage')));
-  $('toggleScan').addEventListener('click', () => {
-    const hidden = !$('sourceCard').hidden;
-    $('sourceCard').hidden = hidden;
-    $('toggleScan').textContent = hidden ? 'Show scan' : 'Hide scan';
-    $('toggleScan').setAttribute('aria-expanded', String(!hidden));
-    if (!hidden) $('sourceFrame').src = pageUrl(page);
-  });
   document.addEventListener('keydown', event => {
     if (event.target.matches('input, textarea, select')) return;
     if (event.key === 'ArrowLeft') movePage(-1);

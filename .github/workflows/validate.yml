@@ -34,6 +34,7 @@ jobs:
           required = [
               'assets/styles.css',
               'assets/icon.svg',
+              'assets/source/gateway-process.pdf',
               'data/pages.js',
               'js/app.js',
               'manifest.webmanifest',

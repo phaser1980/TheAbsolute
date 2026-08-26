@@ -11,7 +11,6 @@
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="assets/styles.css" />
-  <link rel="stylesheet" href="assets/v2.css" />
   <title>The Absolute — Gateway Process, decoded</title>
 </head>
 <body>
@@ -21,13 +20,13 @@
     <nav class="nav shell" aria-label="Primary navigation">
       <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"></span>The Absolute</a>
       <div class="nav-links">
-        <a href="#document">Decode</a>
+        <a href="#document">The steps</a>
         <a href="#practice">Practice</a>
         <a href="#missing-page">Missing page</a>
         <a href="#journal">Journal</a>
         <a href="#grounding">Ground rules</a>
         <button class="nav-install" id="installApp" type="button" hidden>Install</button>
-        <a class="keep" href="https://www.cia.gov/readingroom/docs/CIA-RDP96-00788R001700210016-5.pdf" target="_blank" rel="noreferrer">Original scan ↗</a>
+        <a class="keep" href="assets/source/gateway-process.pdf" target="_blank" rel="noreferrer">Original scan ↗</a>
       </div>
     </nav>
   </header>
@@ -44,7 +43,7 @@
             <span><b id="heroProgressText">0 of 29 pages explored</b><small>Your progress stays in this browser.</small></span>
           </div>
           <div class="actions">
-            <a class="button primary" href="#document">Enter the document</a>
+            <a class="button primary" href="#document">See the extracted steps</a>
             <a class="button" href="#practice">Begin the sequence</a>
           </div>
         </div>
@@ -66,49 +65,42 @@
     <section id="document">
       <div class="shell">
         <div class="section-head reveal">
-          <h2>The document,<br>one page at a time.</h2>
-          <p>The explanation and the source now sit together. Search the report, filter by evidence status, listen to a summary, and open the corresponding scanned page without losing your place.</p>
+          <h2>29 pages,<br>distilled to steps.</h2>
+          <p>Each page of the report is reduced to one clear, doable step and tagged by evidence status — grounded, mixed or speculative — so you can act instead of wading through 1983 military prose. <a class="source-page-link" href="assets/source/gateway-process.pdf" target="_blank" rel="noreferrer">Read the original scan ↗</a></p>
         </div>
 
         <div class="reader-tools reveal">
           <label class="search-field"><span class="sr-only">Search pages</span><input id="pageSearch" type="search" placeholder="Search concepts: hologram, resonance, Focus 12…" /></label>
           <label><span class="sr-only">Filter evidence status</span><select id="evidenceFilter"><option value="all">All evidence levels</option><option value="grounded">Grounded components</option><option value="mixed">Mixed / extrapolated</option><option value="speculative">Speculative claims</option></select></label>
           <button class="button small" id="listenPage" type="button">Listen to summary</button>
-          <button class="button small" id="toggleScan" type="button" aria-expanded="true">Hide scan</button>
         </div>
 
         <div class="reader-layout">
           <nav class="page-index reveal" id="pageIndex" aria-label="Document pages"></nav>
-          <div class="reader-stack">
-            <article class="reader-card reveal" aria-live="polite">
-              <div class="reader-meta">
-                <div class="page-kicker" id="pageKicker">Page 01 of 29</div>
-                <span class="visited-badge" id="visitedBadge">New page</span>
-              </div>
-              <h3 id="pageTitle"></h3>
-              <p class="page-summary" id="pageSummary"></p>
-              <div class="lens-grid">
-                <div class="lens"><span>Plain English</span><p id="plainEnglish"></p></div>
-                <div class="lens"><span>Evidence lens</span><p id="evidenceLens"></p></div>
-                <div class="lens"><span>Practice link</span><p id="practiceLink"></p></div>
-              </div>
-              <div class="reader-foot">
-                <div class="status"><i class="status-dot" id="statusDot"></i><span id="statusText"></span></div>
-                <a class="source-page-link" id="sourcePageLink" href="#" target="_blank" rel="noreferrer">Open scanned page ↗</a>
-              </div>
-              <div class="reader-controls">
-                <button class="button small" id="prevPage" type="button">← Previous page</button>
-                <span class="keyboard-hint">Keyboard: ← →</span>
-                <button class="button small" id="nextPage" type="button">Next page →</button>
-              </div>
-            </article>
-
-            <aside class="source-card reveal" id="sourceCard">
-              <div class="source-card-head"><div><span>Primary source</span><b id="sourceTitle">Original scan · page 1</b></div><a href="https://www.cia.gov/readingroom/docs/CIA-RDP96-00788R001700210016-5.pdf" target="_blank" rel="noreferrer">Full PDF ↗</a></div>
-              <iframe id="sourceFrame" title="Original Gateway Process PDF scan" loading="lazy"></iframe>
-              <p class="source-fallback">PDF preview blocked? Use <a id="sourceFallback" href="#" target="_blank" rel="noreferrer">open scanned page</a>.</p>
-            </aside>
-          </div>
+          <article class="reader-card reveal" aria-live="polite">
+            <div class="reader-meta">
+              <div class="page-kicker" id="pageKicker">Page 01 of 29</div>
+              <span class="visited-badge" id="visitedBadge">New page</span>
+            </div>
+            <h3 id="pageTitle"></h3>
+            <div class="step-callout">
+              <span>The step</span>
+              <p id="practiceLink"></p>
+            </div>
+            <p class="page-summary" id="pageSummary"></p>
+            <div class="lens-grid">
+              <div class="lens"><span>Plain English</span><p id="plainEnglish"></p></div>
+              <div class="lens"><span>Evidence lens</span><p id="evidenceLens"></p></div>
+            </div>
+            <div class="reader-foot">
+              <div class="status"><i class="status-dot" id="statusDot"></i><span id="statusText"></span></div>
+            </div>
+            <div class="reader-controls">
+              <button class="button small" id="prevPage" type="button">← Previous page</button>
+              <span class="keyboard-hint">Keyboard: ← →</span>
+              <button class="button small" id="nextPage" type="button">Next page →</button>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -146,7 +138,7 @@
           <article><span>Version 2.0 rule</span><p>Recovered copies or transcriptions can be presented later only with provenance: source holder, chain of custody, scan image, publication history and confidence level.</p></article>
         </div>
         <div class="case-actions reveal">
-          <a class="button primary" href="https://www.cia.gov/readingroom/docs/CIA-RDP96-00788R001700210016-5.pdf#page=26" id="casePdfLink" target="_blank" rel="noreferrer">Inspect the break in the PDF</a>
+          <a class="button primary" href="assets/source/gateway-process.pdf#page=26" id="casePdfLink" target="_blank" rel="noreferrer">Inspect the break in the PDF</a>
           <button class="button" id="openCaseNotes" type="button">Add investigation note</button>
         </div>
       </div>
@@ -275,6 +267,5 @@
 
   <script src="data/pages.js"></script>
   <script src="js/app.js"></script>
-  <script src="js/v2.js"></script>
 </body>
 </html>

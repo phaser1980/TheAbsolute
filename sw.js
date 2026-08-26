@@ -1,13 +1,11 @@
-const CACHE = 'the-absolute-v3';
+const CACHE = 'the-absolute-v4';
 const CORE = [
   './',
   './index.html',
   './assets/styles.css',
-  './assets/v2.css',
   './assets/icon.svg',
   './data/pages.js',
   './js/app.js',
-  './js/v2.js',
   './manifest.webmanifest'
 ];
 
@@ -30,15 +28,11 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET' || !event.request.url.startsWith(self.location.origin)) return;
 
-  const url = new URL(event.request.url);
-  const isDocument = event.request.mode === 'navigate';
-  const isSourcePdf = url.pathname.endsWith('/assets/source/gateway-process.pdf');
-
-  if (isDocument || isSourcePdf) {
+  if (event.request.mode === 'navigate') {
     event.respondWith(
       fetch(event.request)
         .then(response => {
-          if (response.ok && !isSourcePdf) {
+          if (response.ok) {
             const copy = response.clone();
             caches.open(CACHE).then(cache => cache.put(event.request, copy));
           }
